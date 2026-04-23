@@ -2,1066 +2,240 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Pattern Observer – Classe 4 Informatica</title>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pattern Observer — Risorse</title>
   <style>
-    :root {
-      --bg:          #f7f5f0;
-      --surface:     #ffffff;
-      --surface2:    #eef1f7;
-      --accent:      #1a4fc4;
-      --accent-soft: #dce6fb;
-      --accent2:     #d94f00;
-      --text:        #1c1c1e;
-      --text-muted:  #5a5a6a;
-      --border:      #d8dae3;
-      --code-bg:     #0f1623;
-      --code-text:   #e8eaf0;
-      --tag-obs:     #1a4fc4;
-      --tag-sub:     #0e8a4a;
-      --tag-con:     #d94f00;
-      --shadow:      0 2px 16px rgba(26,79,196,0.07);
-    }
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Lato', sans-serif;
-      font-size: 17px;
-      line-height: 1.75;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f5f7fa;
+      color: #1a1a2e;
+      min-height: 100vh;
     }
 
-    /* ───── HEADER ───── */
     header {
-      background: var(--surface);
-      border-bottom: 3px solid var(--accent);
-      padding: 2.5rem 0 2rem;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    header::before {
-      content: '';
-      position: absolute;
-      top: -60px; right: -80px;
-      width: 320px; height: 320px;
-      border-radius: 50%;
-      background: radial-gradient(circle, var(--accent-soft) 0%, transparent 70%);
-      opacity: .6;
-    }
-    .badge {
-      display: inline-block;
-      background: var(--accent);
-      color: #fff;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .75rem;
-      letter-spacing: .12em;
-      padding: .3rem .85rem;
-      border-radius: 2px;
-      margin-bottom: 1rem;
-    }
-    header h1 {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(2rem, 5vw, 3.2rem);
-      color: var(--text);
-      line-height: 1.15;
-    }
-    header h1 span { color: var(--accent); font-style: italic; }
-    .subtitle {
-      color: var(--text-muted);
-      font-weight: 300;
-      margin-top: .5rem;
-      font-size: 1rem;
+      background: #ffffff;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 1.5rem 2rem;
     }
 
-    /* ───── LAYOUT ───── */
-    .container {
-      max-width: 920px;
-      margin: 0 auto;
+    header h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1a1a2e;
+    }
+
+    header p {
+      font-size: 0.9rem;
+      color: #64748b;
+      margin-top: 0.25rem;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 2.5rem auto;
       padding: 0 1.5rem;
     }
 
-    /* ───── TOC ───── */
-    nav.toc {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1.75rem 2rem;
-      margin: 2.5rem 0;
-      box-shadow: var(--shadow);
-    }
-    nav.toc h2 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.15rem;
-      color: var(--accent);
-      margin-bottom: 1rem;
-      letter-spacing: .02em;
-    }
-    nav.toc ol {
-      padding-left: 1.4rem;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: .25rem 2rem;
-    }
-    nav.toc a {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: .95rem;
-      transition: color .2s;
-    }
-    nav.toc a:hover { color: var(--accent); }
-
-    /* ───── SECTIONS ───── */
-    section {
-      background: var(--surface);
-      border-radius: 10px;
-      padding: 2.25rem 2.5rem;
-      margin-bottom: 2rem;
-      box-shadow: var(--shadow);
-      border: 1px solid var(--border);
-    }
-    section h2 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.75rem;
-      color: var(--text);
-      margin-bottom: 1.2rem;
-      padding-bottom: .6rem;
-      border-bottom: 2px solid var(--accent-soft);
+    /* --- Sezione titolo --- */
+    .section-label {
       display: flex;
       align-items: center;
-      gap: .65rem;
-    }
-    section h2 .num {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--accent);
-      color: #fff;
-      width: 2rem; height: 2rem;
-      border-radius: 50%;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .85rem;
-      flex-shrink: 0;
-    }
-    section h3 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.2rem;
-      color: var(--accent);
-      margin: 1.6rem 0 .6rem;
-    }
-    section p { margin-bottom: .9rem; color: var(--text); }
-    section ul, section ol {
-      padding-left: 1.5rem;
-      margin-bottom: .9rem;
-    }
-    section li { margin-bottom: .3rem; }
-
-    /* ───── CALLOUTS ───── */
-    .callout {
-      border-radius: 6px;
-      padding: 1rem 1.3rem;
-      margin: 1.2rem 0;
-      font-size: .95rem;
-      border-left: 4px solid;
-    }
-    .callout.info  { background: #e8f0fe; border-color: var(--accent);  color: #1a3a7a; }
-    .callout.warn  { background: #fff4e5; border-color: #e8920a;         color: #6b3d00; }
-    .callout.tip   { background: #e8f8ef; border-color: var(--tag-sub);  color: #0b4a28; }
-    .callout strong { font-weight: 700; }
-
-    /* ───── DIAGRAM ───── */
-    .diagram {
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1.75rem;
-      margin: 1.4rem 0;
-      text-align: center;
-      overflow-x: auto;
-    }
-    .diagram svg { max-width: 100%; height: auto; }
-
-    /* ───── ROLES GRID ───── */
-    .roles {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem;
-      margin: 1.2rem 0;
-    }
-    .role-card {
-      border-radius: 8px;
-      padding: 1.1rem 1.3rem;
-      border: 1px solid var(--border);
-    }
-    .role-card h4 {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .82rem;
+      gap: 0.5rem;
+      font-size: 0.75rem;
       font-weight: 600;
-      letter-spacing: .06em;
-      margin-bottom: .4rem;
       text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #94a3b8;
+      margin-bottom: 1rem;
     }
-    .role-card p { font-size: .9rem; margin: 0; }
-    .role-card.obs { background: #dce6fb; border-color: var(--tag-obs); }
-    .role-card.obs h4 { color: var(--tag-obs); }
-    .role-card.sub { background: #d9f2e6; border-color: var(--tag-sub); }
-    .role-card.sub h4 { color: var(--tag-sub); }
-    .role-card.con { background: #fde8dc; border-color: var(--tag-con); }
-    .role-card.con h4 { color: var(--tag-con); }
 
-    /* ───── CODE BLOCKS ───── */
-    .code-wrap {
-      margin: 1.4rem 0;
-      border-radius: 8px;
-      overflow: hidden;
-      border: 1px solid #2a3550;
+    .section-label::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: #e2e8f0;
     }
-    .code-header {
-      background: #1a2440;
-      color: #8899cc;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .75rem;
-      padding: .55rem 1.2rem;
+
+    /* --- Card documento HTML --- */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      transition: box-shadow 0.18s, border-color 0.18s, transform 0.18s;
+    }
+
+    .card:hover {
+      box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+      border-color: #c7d2fe;
+      transform: translateY(-2px);
+    }
+
+    .card-icon {
+      flex-shrink: 0;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: #eef2ff;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      letter-spacing: .08em;
+      justify-content: center;
     }
-    .code-header .dots { display: flex; gap: .4rem; }
-    .code-header .dot {
-      width: 11px; height: 11px;
-      border-radius: 50%;
-    }
-    .dot-r { background: #ff5f57; }
-    .dot-y { background: #febc2e; }
-    .dot-g { background: #28c840; }
-    pre {
-      background: var(--code-bg);
-      color: var(--code-text);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .82rem;
-      line-height: 1.65;
-      padding: 1.4rem 1.6rem;
-      overflow-x: auto;
-      margin: 0;
-    }
-    /* Syntax highlights */
-    .kw  { color: #79c0ff; }   /* keyword */
-    .tp  { color: #ffa657; }   /* type/class */
-    .str { color: #a5d6ff; }   /* string */
-    .cmt { color: #6e8098; font-style: italic; } /* comment */
-    .ann { color: #d2a8ff; }   /* annotation */
-    .num { color: #79c0ff; }   /* number */
-    .fn  { color: #d2a8ff; }   /* function */
-    .pkg { color: #7ee787; }   /* package/import */
 
-    /* ───── INLINE CODE (outside pre blocks) ───── */
-    code {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .82em;
-      background: var(--accent-soft);
-      color: var(--accent);
-      padding: .1em .38em;
-      border-radius: 3px;
-      white-space: nowrap;
+    .card-icon svg {
+      width: 22px;
+      height: 22px;
+      color: #4f46e5;
     }
-    pre code {
-      background: none;
-      color: inherit;
-      padding: 0;
-      font-size: inherit;
-      border-radius: 0;
-    }
-    td code { font-size: .8em; }
 
-    /* ───── STEPS ───── */
-    .steps { counter-reset: step; list-style: none; padding: 0; margin-bottom: 1rem; }
-    .steps li {
-      counter-increment: step;
-      display: flex;
-      gap: 1rem;
-      margin-bottom: .85rem;
-      align-items: flex-start;
+    .card-info {
+      min-width: 0;
     }
-    .steps li::before {
-      content: counter(step);
-      background: var(--accent);
-      color: #fff;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .8rem;
+
+    .card-title {
+      font-size: 0.95rem;
       font-weight: 600;
-      min-width: 1.8rem;
-      height: 1.8rem;
-      border-radius: 50%;
+      color: #1a1a2e;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .card-meta {
+      font-size: 0.78rem;
+      color: #94a3b8;
+      margin-top: 0.2rem;
+    }
+
+    /* --- Video --- */
+    .video-block {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 2.5rem;
+    }
+
+    .video-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .video-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: #fff1f2;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      margin-top: .2rem;
     }
-    .steps li span {
+
+    .video-icon svg {
+      width: 20px;
+      height: 20px;
+      color: #e11d48;
+    }
+
+    .video-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #1a1a2e;
+    }
+
+    .video-filename {
+      font-size: 0.78rem;
+      color: #94a3b8;
+    }
+
+    .video-block video {
       display: block;
-      line-height: 1.7;
-      color: var(--text);
-    }
-
-    /* ───── COMPARE TABLE ───── */
-    table {
       width: 100%;
-      border-collapse: collapse;
-      margin: 1.2rem 0;
-      font-size: .93rem;
+      background: #000;
     }
-    th {
-      background: var(--accent);
-      color: #fff;
-      padding: .65rem 1rem;
-      text-align: left;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .78rem;
-      letter-spacing: .05em;
-    }
-    td {
-      padding: .6rem 1rem;
-      border-bottom: 1px solid var(--border);
-    }
-    tr:nth-child(even) td { background: var(--surface2); }
-    tr:last-child td { border-bottom: none; }
 
-    /* ───── FOOTER ───── */
     footer {
       text-align: center;
-      padding: 2rem 1rem 3rem;
-      color: var(--text-muted);
-      font-size: .85rem;
-    }
-    footer strong { color: var(--accent); }
-
-    @media (max-width: 600px) {
-      section { padding: 1.5rem 1.2rem; }
-      nav.toc ol { grid-template-columns: 1fr; }
+      font-size: 0.78rem;
+      color: #94a3b8;
+      padding: 2rem 1rem;
     }
   </style>
 </head>
 <body>
 
-<!-- ═══════════════════════════════════ HEADER ═══════════════════════════════════ -->
 <header>
-  <div class="container">
-    <div class="badge">DESIGN PATTERNS · JAVA · CLASSE 4 INFORMATICA</div>
-    <h1>Il Pattern <span>Observer</span></h1>
-    <p class="subtitle">Dalle basi teoriche all'implementazione con Swing e Thread</p>
-  </div>
+  <h1>Pattern Observer</h1>
+  <p>Classe 4 — TEPSIT &nbsp;·&nbsp; Risorse didattiche</p>
 </header>
 
-<div class="container">
+<main>
 
-  <!-- ═══ TOC ═══ -->
-  <nav class="toc">
-    <h2>📋 Indice del Tutorial</h2>
-    <ol>
-      <li><a href="#s1">Introduzione ai Design Pattern</a></li>
-      <li><a href="#s2">Cos'è il Pattern Observer</a></li>
-      <li><a href="#s3">Struttura e ruoli principali</a></li>
-      <li><a href="#s4">Perché usare Observer</a></li>
-      <li><a href="#s5">Observer in Java: le interfacce</a></li>
-      <li><a href="#s6">Esempio pratico: contatore con Swing</a></li>
-      <li><a href="#s7">Analisi del codice</a></li>
-      <li><a href="#s8">Esecuzione e output atteso</a></li>
-      <li><a href="#s9">Varianti e approfondimenti</a></li>
-      <li><a href="#s10">Riepilogo e domande di verifica</a></li>
-    </ol>
-  </nav>
+  <!-- ===== Documenti HTML ===== -->
+  <div class="section-label">Documenti</div>
+  <div class="card-grid">
 
-  <!-- ═══ 1 ═══ -->
-  <section id="s1">
-    <h2><span class="num">1</span> Introduzione ai Design Pattern</h2>
-    <p>
-      Un <strong>Design Pattern</strong> (o <em>pattern di progettazione</em>) è una soluzione
-      riutilizzabile a un problema ricorrente nel campo della progettazione del software.
-      Non si tratta di codice pronto da incollare, ma di un <em>modello concettuale</em>
-      che descrive come strutturare classi e oggetti per risolvere una certa categoria di
-      problemi.
-    </p>
-    <p>
-      I pattern furono sistematizzati nel celebre libro
-      <em>Design Patterns: Elements of Reusable Object-Oriented Software</em> (1994)
-      dalla cosiddetta <strong>Gang of Four (GoF)</strong>: Gamma, Helm, Johnson e Vlissides.
-      Il libro classifica 23 pattern in tre famiglie:
-    </p>
-    <div class="roles">
-      <div class="role-card obs">
-        <h4>Creazionali</h4>
-        <p>Riguardano la <em>creazione</em> di oggetti (es. Singleton, Factory, Builder).</p>
+    <a class="card" href="observer_pattern_tutorial.html">
+      <div class="card-icon">
+        <!-- HTML file icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="16 18 22 12 16 6"/>
+          <polyline points="8 6 2 12 8 18"/>
+        </svg>
       </div>
-      <div class="role-card sub">
-        <h4>Strutturali</h4>
-        <p>Riguardano la <em>composizione</em> di classi (es. Adapter, Decorator, Facade).</p>
+      <div class="card-info">
+        <div class="card-title">Tutorial — Observer Pattern</div>
+        <div class="card-meta">observer_pattern_tutorial.html</div>
       </div>
-      <div class="role-card con">
-        <h4>Comportamentali</h4>
-        <p>Riguardano la <em>comunicazione</em> tra oggetti (es. Observer, Strategy, Command).</p>
+    </a>
+
+  </div>
+
+  <!-- ===== Video ===== -->
+  <div class="section-label">Video</div>
+
+  <div class="video-block">
+    <div class="video-header">
+      <div class="video-icon">
+        <!-- Play icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="5 3 19 12 5 21 5 3"/>
+        </svg>
+      </div>
+      <div>
+        <div class="video-title">Il Pattern Observer</div>
+        <div class="video-filename">Il_Pattern_Observer.mp4</div>
       </div>
     </div>
-    <p>Il Pattern <strong>Observer</strong> appartiene alla categoria <em>comportamentale</em>.</p>
-  </section>
-
-  <!-- ═══ 2 ═══ -->
-  <section id="s2">
-    <h2><span class="num">2</span> Cos'è il Pattern Observer</h2>
-    <p>
-      Il Pattern Observer definisce una relazione <strong>uno-a-molti</strong> tra oggetti:
-      quando lo stato di un oggetto cambia, tutti gli oggetti che dipendono da esso
-      vengono <em>notificati e aggiornati automaticamente</em>.
-    </p>
-    <div class="callout info">
-      <strong>Definizione GoF:</strong> «Define a one-to-many dependency between objects so that
-      when one object changes state, all its dependents are notified and updated automatically.»
-    </div>
-    <p>
-      Un esempio quotidiano: immaginate di iscrivervi a una newsletter.
-      Il sito web (l'<em>osservato</em>) mantiene una lista di iscritti (gli <em>osservatori</em>).
-      Ogni volta che viene pubblicato un articolo, tutti gli iscritti ricevono una notifica.
-      Se vi cancellate, smettete di ricevere le email. Il sito non sa (né gli importa)
-      quanti siete: chiama semplicemente "notifica" su ciascuno.
-    </p>
-
-    <h3>Analogo nella programmazione</h3>
-    <p>
-      In un'applicazione con interfaccia grafica, un <strong>thread in background</strong>
-      può calcolare valori (temperatura, conteggio, progresso) mentre la GUI deve
-      aggiornarsi ad ogni cambiamento. Senza un meccanismo di notifica, il thread
-      dovrebbe conoscere tutti i componenti grafici da aggiornare → forte accoppiamento.
-      Con Observer, il thread notifica semplicemente i suoi "ascoltatori" e non sa
-      nulla della loro implementazione concreta.
-    </p>
-  </section>
-
-  <!-- ═══ 3 ═══ -->
-  <section id="s3">
-    <h2><span class="num">3</span> Struttura e ruoli principali</h2>
-
-    <!-- UML-style SVG diagram -->
-    <div class="diagram">
-      <svg viewBox="0 0 780 340" xmlns="http://www.w3.org/2000/svg" font-family="JetBrains Mono, monospace" font-size="13">
-
-        <!-- Subject interface -->
-        <rect x="10" y="40" width="220" height="110" rx="6" fill="#dce6fb" stroke="#1a4fc4" stroke-width="1.5"/>
-        <rect x="10" y="40" width="220" height="28" rx="6" fill="#1a4fc4"/>
-        <rect x="10" y="62" width="220" height="6" fill="#1a4fc4"/>
-        <text x="120" y="60" text-anchor="middle" fill="white" font-size="11" font-style="italic">«interface»</text>
-        <text x="120" y="60" text-anchor="middle" fill="white" dy="14" font-weight="bold" font-size="13">Subject</text>
-        <text x="25" y="105" fill="#1a3a7a" font-size="12">+ addObserver(o)</text>
-        <text x="25" y="122" fill="#1a3a7a" font-size="12">+ removeObserver(o)</text>
-        <text x="25" y="139" fill="#1a3a7a" font-size="12">+ notifyObservers()</text>
-
-        <!-- ConcreteSubject -->
-        <rect x="10" y="215" width="220" height="95" rx="6" fill="#fde8dc" stroke="#d94f00" stroke-width="1.5"/>
-        <rect x="10" y="215" width="220" height="28" rx="6" fill="#d94f00"/>
-        <rect x="10" y="237" width="220" height="6" fill="#d94f00"/>
-        <text x="120" y="233" text-anchor="middle" fill="white" font-weight="bold" font-size="13">ConcreteSubject</text>
-        <text x="25" y="263" fill="#6b3d00" font-size="12">- observers: List</text>
-        <text x="25" y="280" fill="#6b3d00" font-size="12">- state: int</text>
-        <text x="25" y="297" fill="#6b3d00" font-size="12">+ getState(): int</text>
-
-        <!-- implements arrow -->
-        <line x1="120" y1="215" x2="120" y2="153" stroke="#d94f00" stroke-width="1.5" stroke-dasharray="6,3"/>
-        <polygon points="120,150 115,160 125,160" fill="#d94f00"/>
-
-        <!-- Observer interface -->
-        <rect x="320" y="40" width="220" height="90" rx="6" fill="#d9f2e6" stroke="#0e8a4a" stroke-width="1.5"/>
-        <rect x="320" y="40" width="220" height="28" rx="6" fill="#0e8a4a"/>
-        <rect x="320" y="62" width="220" height="6" fill="#0e8a4a"/>
-        <text x="430" y="60" text-anchor="middle" fill="white" font-size="11" font-style="italic">«interface»</text>
-        <text x="430" y="60" text-anchor="middle" fill="white" dy="14" font-weight="bold" font-size="13">Observer</text>
-        <text x="335" y="105" fill="#0b4a28" font-size="12">+ update(valore: int)</text>
-
-        <!-- ConcreteObserver -->
-        <rect x="320" y="215" width="220" height="95" rx="6" fill="#e8f8ef" stroke="#0e8a4a" stroke-width="1.5"/>
-        <rect x="320" y="215" width="220" height="28" rx="6" fill="#0e8a4a"/>
-        <rect x="320" y="237" width="220" height="6" fill="#0e8a4a"/>
-        <text x="430" y="233" text-anchor="middle" fill="white" font-weight="bold" font-size="13">ConcreteObserver</text>
-        <text x="335" y="263" fill="#0b4a28" font-size="12">- label: JLabel</text>
-        <text x="335" y="280" fill="#0b4a28" font-size="12">+ update(valore)</text>
-        <text x="335" y="297" fill="#0b4a28" font-size="12">  → aggiorna GUI</text>
-
-        <!-- implements arrow Observer-->
-        <line x1="430" y1="215" x2="430" y2="133" stroke="#0e8a4a" stroke-width="1.5" stroke-dasharray="6,3"/>
-        <polygon points="430,130 425,140 435,140" fill="#0e8a4a"/>
-
-        <!-- uses arrow -->
-        <line x1="230" y1="90" x2="318" y2="90" stroke="#1a4fc4" stroke-width="1.5"/>
-        <polygon points="320,90 308,84 308,96" fill="#1a4fc4"/>
-        <text x="270" y="82" text-anchor="middle" fill="#1a4fc4" font-size="11">usa</text>
-
-        <!-- notify arrow -->
-        <line x1="232" y1="262" x2="318" y2="262" stroke="#d94f00" stroke-width="1.8"/>
-        <polygon points="320,262 308,256 308,268" fill="#d94f00"/>
-        <text x="275" y="254" text-anchor="middle" fill="#d94f00" font-size="11">notifica</text>
-
-        <!-- Thread box -->
-        <rect x="580" y="215" width="180" height="95" rx="6" fill="#f0f0ff" stroke="#6666cc" stroke-width="1.5"/>
-        <rect x="580" y="215" width="180" height="28" rx="6" fill="#6666cc"/>
-        <rect x="580" y="237" width="180" height="6" fill="#6666cc"/>
-        <text x="670" y="233" text-anchor="middle" fill="white" font-weight="bold" font-size="13">ContatoreThread</text>
-        <text x="595" y="263" fill="#333366" font-size="12">implements Runnable</text>
-        <text x="595" y="280" fill="#333366" font-size="12">+ run(): loop</text>
-        <text x="595" y="297" fill="#333366" font-size="12">+ setState()</text>
-
-        <!-- Thread → ConcreteSubject -->
-        <line x1="580" y1="262" x2="542" y2="262" stroke="#6666cc" stroke-width="1.5" stroke-dasharray="6,3"/>
-        <polygon points="540,262 552,256 552,268" fill="#6666cc"/>
-
-      </svg>
-    </div>
-
-    <div class="roles">
-      <div class="role-card obs">
-        <h4>Subject (Osservabile)</h4>
-        <p>Mantiene la lista degli osservatori, permette di aggiungerli/rimuoverli e li notifica.</p>
-      </div>
-      <div class="role-card sub">
-        <h4>Observer (Osservatore)</h4>
-        <p>Interfaccia con il metodo <code>update()</code> che viene chiamato quando lo stato cambia.</p>
-      </div>
-      <div class="role-card con">
-        <h4>ConcreteSubject</h4>
-        <p>Implementa Subject. Contiene lo stato reale e chiama <code>notifyObservers()</code> ad ogni modifica.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ 4 ═══ -->
-  <section id="s4">
-    <h2><span class="num">4</span> Perché usare il Pattern Observer</h2>
-
-    <table>
-      <thead>
-        <tr>
-          <th>Vantaggio</th>
-          <th>Spiegazione</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>Basso accoppiamento</strong></td>
-          <td>Il Subject conosce solo l'interfaccia Observer, non le classi concrete.</td>
-        </tr>
-        <tr>
-          <td><strong>Apertura all'estensione</strong></td>
-          <td>Si aggiungono nuovi osservatori senza toccare il Subject (principio Open/Closed).</td>
-        </tr>
-        <tr>
-          <td><strong>Notifica automatica</strong></td>
-          <td>Gli osservatori non devono interrogare continuamente il Subject (no polling).</td>
-        </tr>
-        <tr>
-          <td><strong>Riuso del codice</strong></td>
-          <td>Lo stesso Subject può notificare osservatori di tipo completamente diverso.</td>
-        </tr>
-        <tr>
-          <td><strong>Thread-safety</strong></td>
-          <td>Con opportune accortezze, permette comunicazione sicura tra thread e GUI.</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="callout warn">
-      <strong>Attenzione:</strong> un uso eccessivo di Observer può rendere difficile il debug,
-      perché le catene di notifiche possono essere lunghe e non immediatamente visibili nel codice.
-      Usatelo dove la dipendenza uno-a-molti è davvero il problema da risolvere.
-    </div>
-  </section>
-
-  <!-- ═══ 5 ═══ -->
-  <section id="s5">
-    <h2><span class="num">5</span> Observer in Java: le interfacce</h2>
-    <p>
-      Java ha incluso fino a Java 8 le classi <code>java.util.Observable</code> e
-      <code>java.util.Observer</code>. Queste sono state <strong>deprecate in Java 9</strong>
-      per alcune limitazioni di design (Observable è una classe, non un'interfaccia).
-      Per questo motivo, nel nostro esempio definiremo le nostre interfacce personalizzate,
-      approccio consigliato nelle applicazioni moderne.
-    </p>
-
-    <div class="callout tip">
-      <strong>Best practice:</strong> definire interfacce proprie ti dà pieno controllo
-      sulla firma del metodo <code>update()</code> e rende il codice più leggibile
-      e testabile.
-    </div>
-
-    <h3>Interfaccia Observer</h3>
-    <div class="code-wrap">
-      <div class="code-header">
-        <div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div>
-        <span>Observer.java</span>
-      </div>
-      <pre><span class="pkg">package</span> observer.example;
-
-<span class="cmt">/**
- * Interfaccia Observer.
- * Ogni classe che vuole ricevere notifiche deve implementarla.
- */</span>
-<span class="kw">public interface</span> <span class="tp">Observer</span> {
-    <span class="cmt">/**
-     * Chiamato dal Subject quando il suo stato cambia.
-     * @param valore il nuovo valore dello stato
-     */</span>
-    <span class="kw">void</span> <span class="fn">update</span>(<span class="kw">int</span> valore);
-}</pre>
-    </div>
-
-    <h3>Interfaccia Subject</h3>
-    <div class="code-wrap">
-      <div class="code-header">
-        <div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div>
-        <span>Subject.java</span>
-      </div>
-      <pre><span class="pkg">package</span> observer.example;
-
-<span class="cmt">/**
- * Interfaccia Subject (Osservabile).
- * Gestisce la lista degli Observer e le notifiche.
- */</span>
-<span class="kw">public interface</span> <span class="tp">Subject</span> {
-    <span class="kw">void</span> <span class="fn">addObserver</span>(<span class="tp">Observer</span> o);
-    <span class="kw">void</span> <span class="fn">removeObserver</span>(<span class="tp">Observer</span> o);
-    <span class="kw">void</span> <span class="fn">notifyObservers</span>();
-}</pre>
-    </div>
-  </section>
-
-  <!-- ═══ 6 ═══ -->
-  <section id="s6">
-    <h2><span class="num">6</span> Esempio pratico: Contatore con Thread e Swing</h2>
-
-    <p>
-      Realizziamo un'applicazione Swing in cui un <strong>thread in background</strong>
-      incrementa un contatore ogni secondo. La finestra principale mostra il valore
-      corrente in una <code>JLabel</code>, aggiornata in tempo reale grazie al pattern Observer.
-    </p>
-
-    <div class="callout info">
-      <strong>Nota su Swing e Thread:</strong> Swing non è thread-safe. Le modifiche ai
-      componenti grafici devono sempre avvenire sull'<em>Event Dispatch Thread (EDT)</em>.
-      Per questo useremo <code>SwingUtilities.invokeLater()</code> all'interno del metodo
-      <code>update()</code>.
-    </div>
-
-    <h3>Struttura del progetto</h3>
-    <div class="code-wrap">
-      <div class="code-header">
-        <div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div>
-        <span>Struttura cartelle</span>
-      </div>
-      <pre>observer-example/
- └── src/
-      └── observer/
-           └── example/
-                ├── Observer.java          <span class="cmt">// interfaccia Observer</span>
-                ├── Subject.java           <span class="cmt">// interfaccia Subject</span>
-                ├── ContatoreThread.java    <span class="cmt">// Runnable + Subject</span>
-                ├── PannelloContatore.java <span class="cmt">// JFrame + Observer</span>
-                └── Main.java              <span class="cmt">// punto di ingresso</span></pre>
-    </div>
-
-    <!-- FILE 1 -->
-    <h3>ContatoreThread.java — il Subject che implementa Runnable</h3>
-    <div class="code-wrap">
-      <div class="code-header">
-        <div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div>
-        <span>ContatoreThread.java</span>
-      </div>
-      <pre><span class="pkg">package</span> observer.example;
-
-<span class="pkg">import</span> java.util.ArrayList;
-<span class="pkg">import</span> java.util.List;
-
-<span class="cmt">/**
- * ConcreteSubject che implementa anche Runnable.
- * Incrementa un contatore ogni secondo e notifica gli Observer.
- */</span>
-<span class="kw">public class</span> <span class="tp">ContatoreThread</span> <span class="kw">implements</span> <span class="tp">Subject</span>, <span class="tp">Runnable</span> {
-
-    <span class="cmt">// ── Lista degli osservatori (sincronizzata per accesso multi-thread) ──</span>
-    <span class="kw">private final</span> List&lt;<span class="tp">Observer</span>&gt; observers = <span class="kw">new</span> <span class="tp">ArrayList</span>&lt;&gt;();
-
-    <span class="cmt">// ── Stato del Subject: il valore del contatore ──</span>
-    <span class="kw">private volatile int</span> valore = <span class="num">0</span>;
-
-    <span class="cmt">// ── Flag per fermare il thread ──</span>
-    <span class="kw">private volatile boolean</span> attivo = <span class="kw">true</span>;
-
-    <span class="cmt">// ════════════ Implementazione di Subject ════════════</span>
-
-    <span class="ann">@Override</span>
-    <span class="kw">public synchronized void</span> <span class="fn">addObserver</span>(<span class="tp">Observer</span> o) {
-        <span class="kw">if</span> (!observers.contains(o)) {
-            observers.<span class="fn">add</span>(o);
-        }
-    }
-
-    <span class="ann">@Override</span>
-    <span class="kw">public synchronized void</span> <span class="fn">removeObserver</span>(<span class="tp">Observer</span> o) {
-        observers.<span class="fn">remove</span>(o);
-    }
-
-    <span class="ann">@Override</span>
-    <span class="kw">public synchronized void</span> <span class="fn">notifyObservers</span>() {
-        <span class="cmt">// Notifica una copia della lista per evitare ConcurrentModificationException</span>
-        List&lt;<span class="tp">Observer</span>&gt; copia = <span class="kw">new</span> <span class="tp">ArrayList</span>&lt;&gt;(observers);
-        <span class="kw">for</span> (<span class="tp">Observer</span> o : copia) {
-            o.<span class="fn">update</span>(valore);
-        }
-    }
-
-    <span class="cmt">// ════════════ Metodi del Subject concreto ════════════</span>
-
-    <span class="kw">public int</span> <span class="fn">getValore</span>() {
-        <span class="kw">return</span> valore;
-    }
-
-    <span class="kw">private void</span> <span class="fn">setValore</span>(<span class="kw">int</span> v) {
-        <span class="kw">this</span>.valore = v;
-        <span class="fn">notifyObservers</span>();   <span class="cmt">// ogni modifica scatena la notifica</span>
-    }
-
-    <span class="cmt">/** Ferma il loop del thread in modo pulito */</span>
-    <span class="kw">public void</span> <span class="fn">ferma</span>() {
-        attivo = <span class="kw">false</span>;
-    }
-
-    <span class="cmt">// ════════════ Implementazione di Runnable ════════════</span>
-
-    <span class="ann">@Override</span>
-    <span class="kw">public void</span> <span class="fn">run</span>() {
-        <span class="kw">while</span> (attivo) {
-            <span class="kw">try</span> {
-                <span class="tp">Thread</span>.<span class="fn">sleep</span>(<span class="num">1000</span>);   <span class="cmt">// aspetta 1 secondo</span>
-            } <span class="kw">catch</span> (<span class="tp">InterruptedException</span> e) {
-                <span class="tp">Thread</span>.<span class="fn">currentThread</span>().<span class="fn">interrupt</span>();
-                <span class="kw">break</span>;
-            }
-            <span class="fn">setValore</span>(valore + <span class="num">1</span>);  <span class="cmt">// incrementa e notifica</span>
-        }
-    }
-}</pre>
-    </div>
-
-    <!-- FILE 2 -->
-    <h3>PannelloContatore.java — il ConcreteObserver (JFrame)</h3>
-    <div class="code-wrap">
-      <div class="code-header">
-        <div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div>
-        <span>PannelloContatore.java</span>
-      </div>
-      <pre><span class="pkg">package</span> observer.example;
-
-<span class="pkg">import</span> javax.swing.*;
-<span class="pkg">import</span> java.awt.*;
-
-<span class="cmt">/**
- * ConcreteObserver: finestra Swing che visualizza il valore del contatore.
- * Implementa Observer → riceve le notifiche e aggiorna la JLabel.
- */</span>
-<span class="kw">public class</span> <span class="tp">PannelloContatore</span> <span class="kw">extends</span> <span class="tp">JFrame</span> <span class="kw">implements</span> <span class="tp">Observer</span> {
-
-    <span class="kw">private final</span> <span class="tp">JLabel</span> lblValore;
-    <span class="kw">private final</span> <span class="tp">JLabel</span> lblStatus;
-    <span class="kw">private final</span> <span class="tp">ContatoreThread</span> contatore;
-
-    <span class="kw">public</span> <span class="fn">PannelloContatore</span>(<span class="tp">ContatoreThread</span> contatore) {
-        <span class="kw">this</span>.contatore = contatore;
-
-        <span class="cmt">// ── Impostazioni finestra ──</span>
-        <span class="fn">setTitle</span>(<span class="str">"Pattern Observer – Contatore in tempo reale"</span>);
-        <span class="fn">setDefaultCloseOperation</span>(<span class="tp">JFrame</span>.EXIT_ON_CLOSE);
-        <span class="fn">setSize</span>(<span class="num">400</span>, <span class="num">250</span>);
-        <span class="fn">setLocationRelativeTo</span>(<span class="kw">null</span>);
-        <span class="fn">setLayout</span>(<span class="kw">new</span> <span class="tp">BorderLayout</span>(<span class="num">10</span>, <span class="num">10</span>));
-        <span class="fn">getContentPane</span>().<span class="fn">setBackground</span>(<span class="kw">new</span> <span class="tp">Color</span>(<span class="num">247</span>, <span class="num">245</span>, <span class="num">240</span>));
-
-        <span class="cmt">// ── Pannello centrale con il valore del contatore ──</span>
-        <span class="tp">JPanel</span> centro = <span class="kw">new</span> <span class="tp">JPanel</span>(<span class="kw">new</span> <span class="tp">GridBagLayout</span>());
-        centro.<span class="fn">setOpaque</span>(<span class="kw">false</span>);
-
-        lblValore = <span class="kw">new</span> <span class="tp">JLabel</span>(<span class="str">"0"</span>);
-        lblValore.<span class="fn">setFont</span>(<span class="kw">new</span> <span class="tp">Font</span>(<span class="str">"SansSerif"</span>, <span class="tp">Font</span>.BOLD, <span class="num">72</span>));
-        lblValore.<span class="fn">setForeground</span>(<span class="kw">new</span> <span class="tp">Color</span>(<span class="num">26</span>, <span class="num">79</span>, <span class="num">196</span>));
-        centro.<span class="fn">add</span>(lblValore);
-
-        <span class="cmt">// ── Barra superiore ──</span>
-        <span class="tp">JLabel</span> titolo = <span class="kw">new</span> <span class="tp">JLabel</span>(<span class="str">"  Contatore (aggiornato ogni secondo)"</span>);
-        titolo.<span class="fn">setFont</span>(<span class="kw">new</span> <span class="tp">Font</span>(<span class="str">"SansSerif"</span>, <span class="tp">Font</span>.PLAIN, <span class="num">14</span>));
-        titolo.<span class="fn">setForeground</span>(<span class="tp">Color</span>.DARK_GRAY);
-        titolo.<span class="fn">setBorder</span>(<span class="tp">BorderFactory</span>.<span class="fn">createEmptyBorder</span>(<span class="num">10</span>,<span class="num">0</span>,<span class="num">0</span>,<span class="num">0</span>));
-
-        <span class="cmt">// ── Barra di stato inferiore ──</span>
-        lblStatus = <span class="kw">new</span> <span class="tp">JLabel</span>(<span class="str">"  ● Thread in esecuzione"</span>);
-        lblStatus.<span class="fn">setFont</span>(<span class="kw">new</span> <span class="tp">Font</span>(<span class="str">"SansSerif"</span>, <span class="tp">Font</span>.PLAIN, <span class="num">12</span>));
-        lblStatus.<span class="fn">setForeground</span>(<span class="kw">new</span> <span class="tp">Color</span>(<span class="num">14</span>, <span class="num">138</span>, <span class="num">74</span>));
-        lblStatus.<span class="fn">setBorder</span>(<span class="tp">BorderFactory</span>.<span class="fn">createEmptyBorder</span>(<span class="num">0</span>,<span class="num">0</span>,<span class="num">8</span>,<span class="num">0</span>));
-
-        <span class="cmt">// ── Pulsante Stop ──</span>
-        <span class="tp">JButton</span> btnStop = <span class="kw">new</span> <span class="tp">JButton</span>(<span class="str">"⏹ Ferma"</span>);
-        btnStop.<span class="fn">setFont</span>(<span class="kw">new</span> <span class="tp">Font</span>(<span class="str">"SansSerif"</span>, <span class="tp">Font</span>.BOLD, <span class="num">13</span>));
-        btnStop.<span class="fn">setBackground</span>(<span class="kw">new</span> <span class="tp">Color</span>(<span class="num">217</span>, <span class="num">79</span>, <span class="num">0</span>));
-        btnStop.<span class="fn">setForeground</span>(<span class="tp">Color</span>.WHITE);
-        btnStop.<span class="fn">setFocusPainted</span>(<span class="kw">false</span>);
-        btnStop.<span class="fn">addActionListener</span>(e -&gt; {
-            contatore.<span class="fn">ferma</span>();
-            contatore.<span class="fn">removeObserver</span>(<span class="kw">this</span>);
-            lblStatus.<span class="fn">setText</span>(<span class="str">"  ■ Thread fermato"</span>);
-            lblStatus.<span class="fn">setForeground</span>(<span class="kw">new</span> <span class="tp">Color</span>(<span class="num">180</span>, <span class="num">50</span>, <span class="num">0</span>));
-            btnStop.<span class="fn">setEnabled</span>(<span class="kw">false</span>);
-        });
-
-        <span class="tp">JPanel</span> sud = <span class="kw">new</span> <span class="tp">JPanel</span>(<span class="kw">new</span> <span class="tp">FlowLayout</span>(<span class="tp">FlowLayout</span>.CENTER));
-        sud.<span class="fn">setOpaque</span>(<span class="kw">false</span>);
-        sud.<span class="fn">add</span>(btnStop);
-        sud.<span class="fn">add</span>(lblStatus);
-
-        <span class="fn">add</span>(titolo, <span class="tp">BorderLayout</span>.NORTH);
-        <span class="fn">add</span>(centro, <span class="tp">BorderLayout</span>.CENTER);
-        <span class="fn">add</span>(sud,    <span class="tp">BorderLayout</span>.SOUTH);
-    }
-
-    <span class="cmt">// ════════════ Implementazione di Observer ════════════</span>
-
-    <span class="ann">@Override</span>
-    <span class="kw">public void</span> <span class="fn">update</span>(<span class="kw">int</span> valore) {
-        <span class="cmt">/*
-         * IMPORTANTE: il metodo update() viene chiamato dal thread in background.
-         * Le modifiche ai componenti Swing devono avvenire sull'EDT.
-         * SwingUtilities.invokeLater() schedula l'aggiornamento correttamente.
-         */</span>
-        <span class="tp">SwingUtilities</span>.<span class="fn">invokeLater</span>(() -&gt;
-            lblValore.<span class="fn">setText</span>(<span class="tp">String</span>.<span class="fn">valueOf</span>(valore))
-        );
-    }
-}</pre>
-    </div>
-
-    <!-- FILE 3 -->
-    <h3>Main.java — punto di ingresso</h3>
-    <div class="code-wrap">
-      <div class="code-header">
-        <div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div>
-        <span>Main.java</span>
-      </div>
-      <pre><span class="pkg">package</span> observer.example;
-
-<span class="pkg">import</span> javax.swing.SwingUtilities;
-
-<span class="kw">public class</span> <span class="tp">Main</span> {
-
-    <span class="kw">public static void</span> <span class="fn">main</span>(<span class="tp">String</span>[] args) {
-
-        <span class="cmt">// 1. Crea il Subject (che è anche Runnable)</span>
-        <span class="tp">ContatoreThread</span> contatore = <span class="kw">new</span> <span class="tp">ContatoreThread</span>();
-
-        <span class="cmt">// 2. Crea la GUI sull'EDT e la registra come Observer</span>
-        <span class="tp">SwingUtilities</span>.<span class="fn">invokeLater</span>(() -&gt; {
-            <span class="tp">PannelloContatore</span> finestra = <span class="kw">new</span> <span class="tp">PannelloContatore</span>(contatore);
-            contatore.<span class="fn">addObserver</span>(finestra);  <span class="cmt">// ← registrazione Observer</span>
-            finestra.<span class="fn">setVisible</span>(<span class="kw">true</span>);
-        });
-
-        <span class="cmt">// 3. Avvia il thread in background (è un thread demone: si chiude con la JVM)</span>
-        <span class="tp">Thread</span> t = <span class="kw">new</span> <span class="tp">Thread</span>(contatore);
-        t.<span class="fn">setDaemon</span>(<span class="kw">true</span>);
-        t.<span class="fn">setName</span>(<span class="str">"Thread-Contatore"</span>);
-        t.<span class="fn">start</span>();
-    }
-}</pre>
-    </div>
-  </section>
-
-  <!-- ═══ 7 ═══ -->
-  <section id="s7">
-    <h2><span class="num">7</span> Analisi approfondita del codice</h2>
-
-    <h3>Flusso di esecuzione</h3>
-    <ul class="steps">
-      <li>
-        <span><code>Main.main()</code> crea un'istanza di <code>ContatoreThread</code> (il Subject).</span>
-      </li>
-      <li>
-        <span>Sull'EDT viene creato <code>PannelloContatore</code> (l'Observer), che viene registrato nel Subject tramite <code>addObserver(finestra)</code>.</span>
-      </li>
-      <li>
-        <span>Il thread viene avviato: il metodo <code>run()</code> entra nel ciclo e aspetta 1 secondo con <code>Thread.sleep(1000)</code>.</span>
-      </li>
-      <li>
-        <span>Dopo ogni attesa, chiama <code>setValore(valore + 1)</code>, che internamente invoca <code>notifyObservers()</code>.</span>
-      </li>
-      <li>
-        <span><code>notifyObservers()</code> itera la lista e chiama <code>update(valore)</code> su ogni Observer registrato.</span>
-      </li>
-      <li>
-        <span><code>PannelloContatore.update()</code> usa <code>SwingUtilities.invokeLater()</code> per aggiornare la <code>JLabel</code> in modo thread-safe sull'EDT.</span>
-      </li>
-    </ul>
-
-    <h3>Parole chiave da ricordare</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Costrutto</th>
-          <th>Perché è stato usato</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>volatile int valore</code></td>
-          <td>Garantisce la visibilità della variabile tra thread diversi senza necessità di sincronizzazione completa.</td>
-        </tr>
-        <tr>
-          <td><code>synchronized</code> su addObserver / notify</td>
-          <td>Protegge la lista degli observer da accessi concorrenti provenienti da thread diversi.</td>
-        </tr>
-        <tr>
-          <td>Copia della lista in <code>notifyObservers()</code></td>
-          <td>Evita <code>ConcurrentModificationException</code> nel caso in cui un observer si rimuova durante la notifica.</td>
-        </tr>
-        <tr>
-          <td><code>SwingUtilities.invokeLater()</code></td>
-          <td>Schedula la modifica della GUI sull'Event Dispatch Thread (EDT), unico thread sicuro per Swing.</td>
-        </tr>
-        <tr>
-          <td><code>thread.setDaemon(true)</code></td>
-          <td>Il thread si chiude automaticamente quando si chiude la finestra principale, senza bloccare la JVM.</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="callout tip">
-      <strong>Tip per il debug:</strong> aggiungete una <code>System.out.println()</code>
-      all'interno di <code>update()</code> e di <code>notifyObservers()</code> per visualizzare
-      in console il nome del thread corrente con <code>Thread.currentThread().getName()</code>.
-      Osserverete che la notifica parte dal thread <em>"Thread-Contatore"</em>, mentre la modifica
-      alla GUI avviene sul thread <em>"AWT-EventQueue-0"</em>.
-    </div>
-  </section>
-
-  <!-- ═══ 8 ═══ -->
-  <section id="s8">
-    <h2><span class="num">8</span> Esecuzione e output atteso</h2>
-    <p>
-      Compilate ed eseguite il progetto con il vostro IDE (IntelliJ IDEA, Eclipse o NetBeans).
-      Vedrete una finestra simile a questa:
-    </p>
-    <div class="diagram">
-      <svg viewBox="0 0 400 230" xmlns="http://www.w3.org/2000/svg" font-family="SansSerif, sans-serif">
-        <!-- window chrome -->
-        <rect x="10" y="10" width="380" height="210" rx="8" fill="#f7f5f0" stroke="#c0c0cc" stroke-width="1.5"/>
-        <rect x="10" y="10" width="380" height="32" rx="8" fill="#e0ddd8" stroke="#c0c0cc" stroke-width="1.5"/>
-        <rect x="10" y="30" width="380" height="12" fill="#e0ddd8"/>
-        <circle cx="30" cy="26" r="6" fill="#ff5f57"/>
-        <circle cx="50" cy="26" r="6" fill="#febc2e"/>
-        <circle cx="70" cy="26" r="6" fill="#28c840"/>
-        <text x="200" y="30" text-anchor="middle" fill="#555" font-size="11">Pattern Observer – Contatore in tempo reale</text>
-
-        <!-- label title -->
-        <text x="25" y="62" fill="#555" font-size="12">  Contatore (aggiornato ogni secondo)</text>
-
-        <!-- big number -->
-        <text x="200" y="150" text-anchor="middle" fill="#1a4fc4" font-size="80" font-weight="bold">42</text>
-
-        <!-- status and button -->
-        <rect x="140" y="175" width="80" height="26" rx="4" fill="#d94f00"/>
-        <text x="180" y="192" text-anchor="middle" fill="white" font-size="12" font-weight="bold">⏹ Ferma</text>
-        <text x="240" y="192" fill="#0e8a4a" font-size="11">● Thread in esecuzione</text>
-      </svg>
-    </div>
-    <p>
-      Ogni secondo il numero aumenta di 1. Premendo <strong>Ferma</strong>, il thread si arresta
-      e l'Observer viene rimosso dalla lista: la label smette di aggiornarsi.
-    </p>
-  </section>
-
-  <!-- ═══ 9 ═══ -->
-  <section id="s9">
-    <h2><span class="num">9</span> Varianti e approfondimenti</h2>
-
-    <h3>9.1 — Observer con più componenti</h3>
-    <p>
-      Basta creare un secondo Observer, ad esempio un <code>JProgressBar</code>, e registrarlo
-      con <code>contatore.addObserver(progressBar)</code>. Il Subject non cambia: notificherà
-      entrambi automaticamente.
-    </p>
-    <div class="code-wrap">
-      <div class="code-header">
-        <div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div>
-        <span>Esempio: secondo Observer</span>
-      </div>
-      <pre><span class="cmt">// In Main.java, dopo aver creato finestra:</span>
-<span class="tp">JProgressBar</span> bar = <span class="kw">new</span> <span class="tp">JProgressBar</span>(<span class="num">0</span>, <span class="num">100</span>);
-
-<span class="tp">Observer</span> obsBar = valore -&gt; <span class="tp">SwingUtilities</span>.<span class="fn">invokeLater</span>(() -&gt;
-    bar.<span class="fn">setValue</span>(valore % <span class="num">101</span>)   <span class="cmt">// cicla da 0 a 100</span>
-);
-
-contatore.<span class="fn">addObserver</span>(finestra);   <span class="cmt">// Observer 1 → JLabel</span>
-contatore.<span class="fn">addObserver</span>(obsBar);    <span class="cmt">// Observer 2 → JProgressBar</span></pre>
-    </div>
-
-    <h3>9.2 — Pattern Observer e PropertyChangeListener</h3>
-    <p>
-      Il JDK include <code>java.beans.PropertyChangeSupport</code> e
-      <code>PropertyChangeListener</code>, un'implementazione pronta del pattern Observer
-      già integrata con Swing (usata da molti componenti standard). Vale la pena studiarla
-      dopo aver capito il pattern di base.
-    </p>
-
-    <h3>9.3 — Observer nella programmazione reattiva</h3>
-    <p>
-      Il pattern Observer è il fondamento della <strong>Reactive Programming</strong>:
-      librerie come <em>RxJava</em> e <em>Project Reactor</em> estendono questo concetto
-      con stream di dati asincroni, operatori di trasformazione e gestione avanzata degli errori.
-    </p>
-
-    <div class="callout tip">
-      <strong>Approfondimento:</strong> studiare il pattern Observer è il primo passo per
-      comprendere l'architettura <em>Model-View-Controller (MVC)</em>, dove il Model è il
-      Subject e la View è l'Observer. MVC è alla base di framework come Spring MVC e JavaFX.
-    </div>
-  </section>
-
-  <!-- ═══ 10 ═══ -->
-  <section id="s10">
-    <h2><span class="num">10</span> Riepilogo e domande di verifica</h2>
-
-    <h3>Concetti chiave</h3>
-    <ul>
-      <li>Il Pattern Observer definisce una relazione <strong>uno-a-molti</strong> tra oggetti.</li>
-      <li>Il <strong>Subject</strong> mantiene la lista degli osservatori e li notifica ad ogni cambio di stato.</li>
-      <li>L'<strong>Observer</strong> implementa il metodo <code>update()</code> per ricevere le notifiche.</li>
-      <li>Il pattern riduce l'<strong>accoppiamento</strong>: Subject e Observer si conoscono solo tramite interfaccia.</li>
-      <li>In Swing, le notifiche da thread secondari devono passare per <code>SwingUtilities.invokeLater()</code>.</li>
-      <li>La parola chiave <code>volatile</code> garantisce la visibilità delle variabili tra thread.</li>
-    </ul>
-
-    <h3>Domande di verifica</h3>
-    <ol>
-      <li>Qual è la differenza tra <em>accoppiamento forte</em> e <em>accoppiamento debole</em>? Come il pattern Observer favorisce il secondo?</li>
-      <li>Perché è necessario <code>SwingUtilities.invokeLater()</code> nel metodo <code>update()</code>? Cosa potrebbe succedere senza?</li>
-      <li>Cosa accade se si rimuove la <code>volatile</code> dalla variabile <code>valore</code>? Quali problemi potrebbero verificarsi?</li>
-      <li>Implementate un terzo Observer che, ogni volta che il contatore raggiunge un multiplo di 5, mostri un <code>JOptionPane</code> con un messaggio di notifica.</li>
-      <li>Spiegate perché in <code>notifyObservers()</code> viene creata una copia della lista degli observer prima di iterarla.</li>
-      <li>Come modifichereste il progetto per permettere a un Observer di ricevere sia il valore precedente che quello nuovo?</li>
-    </ol>
-  </section>
-
-</div><!-- /container -->
-
-<footer>
-  <p>Tutorial realizzato per la <strong>Classe 4 Informatica</strong> &mdash; Pattern Observer in Java &amp; Swing</p>
-  <p style="margin-top:.4rem;">Design Patterns · GoF · Thread-safe Observer · SwingUtilities</p>
-</footer>
+    <video controls preload="metadata">
+      <source src="Il_Pattern_Observer.mp4" type="video/mp4" />
+      Il browser non supporta la riproduzione video.
+    </video>
+  </div>
+
+</main>
+
+<footer>Pattern Observer &mdash; Classe 4 TEPSIT</footer>
 
 </body>
 </html>
