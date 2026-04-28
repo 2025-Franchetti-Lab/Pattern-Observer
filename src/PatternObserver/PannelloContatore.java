@@ -6,6 +6,7 @@ package PatternObserver;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
 /**
  * ConcreteObserver: finestra Swing che visualizza il valore del contatore.
@@ -14,11 +15,14 @@ import java.awt.*;
 public class PannelloContatore extends JFrame implements Observer {
 
     private final JLabel lblValore;
+    private final JLabel lblValore2;
     private final JLabel lblStatus;
-    private final ContatoreThread contatore;
+    private final ContatoreThread contatore0;
+    private final ContatoreThread contatore1;
 
-    public PannelloContatore(ContatoreThread contatore) {
-        this.contatore = contatore;
+    public PannelloContatore(ContatoreThread contatore0, ContatoreThread contatore1) {
+        this.contatore0 = contatore0;
+        this.contatore1 = contatore1;
 
         // ── Impostazioni finestra ──
         setTitle("Pattern Observer – Contatore in tempo reale");
@@ -28,14 +32,24 @@ public class PannelloContatore extends JFrame implements Observer {
         setLayout(new BorderLayout(10, 10));
         getContentPane().setBackground(new Color(247, 245, 240));
 
-        // ── Pannello centrale con il valore del contatore ──
+        // ── Pannello centrale con i valori dei due contatori affiancati e centrati ──
         JPanel centro = new JPanel(new GridBagLayout());
         centro.setOpaque(false);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(0, 24, 0, 24);
 
         lblValore = new JLabel("0");
         lblValore.setFont(new Font("SansSerif", Font.BOLD, 72));
         lblValore.setForeground(new Color(26, 79, 196));
-        centro.add(lblValore);
+        gbc.gridx = 0;
+        centro.add(lblValore, gbc);
+
+        lblValore2 = new JLabel("0");
+        lblValore2.setFont(new Font("SansSerif", Font.BOLD, 72));
+        lblValore2.setForeground(new Color(196, 79, 26));
+        gbc.gridx = 1;
+        centro.add(lblValore2, gbc);
 
         // ── Barra superiore ──
         JLabel titolo = new JLabel("  Contatore (aggiornato ogni secondo)");
@@ -59,8 +73,10 @@ public class PannelloContatore extends JFrame implements Observer {
         btnStop.setFocusPainted(false);
         btnStop.setPreferredSize(new Dimension(160, 42));
         btnStop.addActionListener(e -> {
-            contatore.ferma();
-            contatore.removeObserver(this);
+            contatore0.ferma();
+            contatore0.removeObserver(this);
+            contatore1.ferma();
+            contatore1.removeObserver(this);
             lblStatus.setText("  ■ Thread fermato");
             lblStatus.setForeground(new Color(180, 50, 0));
             btnStop.setEnabled(false);
@@ -79,14 +95,18 @@ public class PannelloContatore extends JFrame implements Observer {
     // ════════════ Implementazione di Observer ════════════
 
     @Override
-    public void update(int valore) {
+    public void update(int id, int valore) {
         /*
          * IMPORTANTE: il metodo update() viene chiamato dal thread in background.
          * Le modifiche ai componenti Swing devono avvenire sull'EDT.
          * SwingUtilities.invokeLater() schedula l'aggiornamento correttamente.
          */
-        SwingUtilities.invokeLater(() ->
-            lblValore.setText(String.valueOf(valore))
-        );
+        SwingUtilities.invokeLater(() -> {
+            if (id == 0) {
+                lblValore.setText(String.valueOf(valore));
+            } else {
+                lblValore2.setText(String.valueOf(valore));
+            }
+        });
     }
 }

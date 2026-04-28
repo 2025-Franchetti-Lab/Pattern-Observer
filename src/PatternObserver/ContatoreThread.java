@@ -14,6 +14,12 @@ import java.util.List;
  */
 public class ContatoreThread implements Subject, Runnable {
 
+    // ── Identificativo del thread ──
+    private final int id;
+
+    // ── Tempo di attesa in millisecondi tra un incremento e l'altro ──
+    private final int sleep;
+
     // ── Lista degli osservatori (sincronizzata per accesso multi-thread) ──
     private final List<Observer> observers = new ArrayList<>();
 
@@ -22,6 +28,11 @@ public class ContatoreThread implements Subject, Runnable {
 
     // ── Flag per fermare il thread ──
     private volatile boolean attivo = true;
+
+    public ContatoreThread(int id, int sleep) {
+        this.id = id;
+        this.sleep = sleep;
+    }
 
     // ════════════ Implementazione di Subject ════════════
 
@@ -42,7 +53,7 @@ public class ContatoreThread implements Subject, Runnable {
         // Notifica una copia della lista per evitare ConcurrentModificationException
         List<Observer> copia = new ArrayList<>(observers);
         for (Observer o : copia) {
-            o.update(valore);
+            o.update(id, valore);
         }
     }
 
@@ -68,7 +79,7 @@ public class ContatoreThread implements Subject, Runnable {
     public void run() {
         while (attivo) {
             try {
-                Thread.sleep(1000);   // aspetta 1 secondo
+                Thread.sleep(sleep);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 break;

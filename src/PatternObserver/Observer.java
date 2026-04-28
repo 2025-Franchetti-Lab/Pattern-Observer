@@ -11,7 +11,8 @@ package PatternObserver;
 public interface Observer {
     /**
      * Chiamato dal Subject quando il suo stato cambia.
+     * @param id     identificativo del thread che ha generato la notifica
      * @param valore il nuovo valore dello stato
      */
-    void update(int valore);
+    void update(int id, int valore);
 }

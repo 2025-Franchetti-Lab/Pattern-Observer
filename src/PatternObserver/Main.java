@@ -16,21 +16,28 @@ public class Main {
      */
     public static void main(String[] args) {
 
-        // 1. Crea il Subject (che è anche Runnable)
-        ContatoreThread contatore = new ContatoreThread();
+        // 1. Crea i due Subject (uno per thread), ognuno con il proprio ID
+        ContatoreThread contatore0 = new ContatoreThread(0, 1000);
+        ContatoreThread contatore1 = new ContatoreThread(1, 500);
 
-        // 2. Crea la GUI sull'EDT e la registra come Observer
+        // 2. Crea la GUI sull'EDT e la registra come Observer su entrambi i thread
         SwingUtilities.invokeLater(() -> {
-            PannelloContatore finestra = new PannelloContatore(contatore);
-            contatore.addObserver(finestra);  // ← registrazione Observer
+            PannelloContatore finestra = new PannelloContatore(contatore0, contatore1);
+            contatore0.addObserver(finestra);  // ← registrazione Observer thread 0
+            contatore1.addObserver(finestra);  // ← registrazione Observer thread 1
             finestra.setVisible(true);
         });
 
-        // 3. Avvia il thread in background (è un thread demone: si chiude con la JVM)
-        Thread t = new Thread(contatore);
-        t.setDaemon(true);
-        t.setName("Thread-Contatore");
-        t.start();
+        // 3. Avvia i thread in background (demoni: si chiudono con la JVM)
+        Thread t0 = new Thread(contatore0);
+        t0.setDaemon(true);
+        t0.setName("Thread-Contatore-0");
+        t0.start();
+
+        Thread t1 = new Thread(contatore1);
+        t1.setDaemon(true);
+        t1.setName("Thread-Contatore-1");
+        t1.start();
     }
     
 }
